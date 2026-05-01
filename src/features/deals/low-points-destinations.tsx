@@ -1,21 +1,17 @@
-const mockDestinations = [
-  { destination: 'Ilhéus', points: 13140 },
-  { destination: 'Salvador', points: 9800 },
-  { destination: 'São Paulo', points: 11200 }
-];
+interface DestinationDeal { destination: string; code: string; points: number }
 
-export function LowPointsDestinations() {
+export function LowPointsDestinations({ destinations }: { destinations: DestinationDeal[] }) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-lg font-semibold">Viajar com poucos pontos</h2>
-      <ul className="mt-4 space-y-2">
-        {mockDestinations.map((item) => (
-          <li key={item.destination} className="flex items-center justify-between rounded-md border border-slate-200 px-3 py-2 text-sm">
-            <span>{item.destination}</span>
-            <strong>{item.points.toLocaleString('pt-BR')} pts</strong>
-          </li>
+    <section id="poucos-pontos" className="scroll-mt-24 rounded-2xl border border-sky-100 bg-white p-6 shadow-lg shadow-sky-100/50">
+      <h2 className="text-xl font-semibold text-sky-900">Qualquer lugar — menor pontuação</h2>
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
+        {destinations.map((item) => (
+          <article key={item.destination} className="rounded-2xl border border-sky-100 p-4 shadow-md">
+            <h3 className="font-semibold">{item.destination} ({item.code})</h3>
+            <p className="mt-2 inline-block rounded-full bg-sky-600 px-3 py-1 text-sm text-white">{item.points.toLocaleString('pt-BR')} pts</p>
+          </article>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
